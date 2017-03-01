@@ -8,7 +8,7 @@ app.get("/", function(req,res){
     res.sendfile(__dirname + "/main.html");
 })
 
-app.post("/login", function(req,res){
+app.get("/login", function(req,res){
     res.json({"size": 1})
 })
 
