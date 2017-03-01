@@ -9,11 +9,11 @@ app.get("/", function(req,res){
 })
 
 app.post("/login", function(req,res){
-    res.json({"size": 1})
+    res.sendFile(__dirname + "/login.html")
 })
 
 app.post("/signup", function(req,res){
-    res.json({"size": 1})
+    res.sendFile(__dirname + "/signup.html")
 })
 
 app.listen(process.env.PORT || 3000, function () {
