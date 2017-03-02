@@ -2,9 +2,10 @@ var express = require('express');
 var app = express()
 var multer  = require('multer');
 var storage = multer.memoryStorage()
-
+var bodyParser = require('body-parser');
 var upload = multer({ storage: storage })
 
+app.use(bodyParser());
 
 
 app.get("/", function(req,res){
