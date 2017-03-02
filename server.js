@@ -43,7 +43,7 @@ app.post("/check", function(req,res){
     var user = req.body.user;
     for (var i = 0 ; i < num.length; i++) {
         if (user == users[i]) {
-            var x = i;
+            x = i;
         }
     }
     
