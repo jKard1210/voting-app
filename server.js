@@ -6,6 +6,11 @@ var bodyParser = require('body-parser');
 var upload = multer({ storage: storage })
 var passwordHash = require('password-hash');
 
+var users = [];
+var passes = [];
+var emails = [];
+var num = 0;
+
 
 app.use(bodyParser());
 
@@ -24,7 +29,35 @@ app.post("/signup", function(req,res){
 
 app.post("/newAccount", function(req,res){
     var hashedPass = passwordHash.generate(req.body.pass);
-    res.json({"username": req.body.user, "password": hashedPass, "email": req.body.email})
+    users[num] = req.body.user;
+    passes[num] = hashedPass;
+    emails[num] = req.body.email;
+    num++;
+    
+    res.sendFile(__dirname + "/homePage.html")
+})
+
+app.post("/check", function(req,res){
+    var x = -1;
+    var pass = req.body.pass;
+    var user = req.body.user;
+    for (var i = 0 ; i < num.length; i++) {
+        if (user == users[i]) {
+            var x = i;
+        }
+    }
+    
+    if (x == -1) {
+        res.send("Sorry");
+    }
+    else {
+        if (passwordHash.verify(pass, passes[x])) {
+            res.send("Nice");
+        }
+        else {
+            res.send("Nope");
+        }
+    }
 })
 
 app.listen(process.env.PORT || 3000, function () {
