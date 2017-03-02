@@ -4,6 +4,8 @@ var multer  = require('multer');
 var storage = multer.memoryStorage()
 var bodyParser = require('body-parser');
 var upload = multer({ storage: storage })
+var passwordHash = require('password-hash');
+
 
 app.use(bodyParser());
 
@@ -21,7 +23,8 @@ app.post("/signup", function(req,res){
 })
 
 app.post("/newAccount", function(req,res){
-    res.json({"username": req.body.user, "password": req.body.pass, "email": req.body.email})
+    var hashedPass = passwordHash.generate(req.body.pass);
+    res.json({"username": req.body.user, "password": hashedPass, "email": req.body.email})
 })
 
 app.listen(process.env.PORT || 3000, function () {
