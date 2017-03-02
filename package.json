@@ -4,8 +4,9 @@
   "description": "A voting app",
   "main": "server.js",
   "dependencies": {
-    "multer": "^1.1.0",
+    "body-parser": "^1.17.0",
     "express": "^4.14.0",
+    "multer": "^1.1.0",
     "nodemon": "^1.9.1"
   },
   "devDependencies": {}
