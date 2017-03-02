@@ -7,8 +7,6 @@ var upload = multer({ storage: storage })
 var passwordHash = require('password-hash');
 
 var users = [];
-var passes = [];
-var emails = [];
 var num = 0;
 
 
@@ -29,10 +27,11 @@ app.post("/signup", function(req,res){
 
 app.post("/newAccount", function(req,res){
     var hashedPass = passwordHash.generate(req.body.pass);
-    users[num] = req.body.user;
-    passes[num] = hashedPass;
-    emails[num] = req.body.email;
-    num++;
+    users.push({
+        pass: hashedPass,
+        email: req.body.email,
+        user: req.body.user
+    })
     
     res.sendFile(__dirname + "/homePage.html")
 })
@@ -42,7 +41,7 @@ app.post("/check", function(req,res){
     var pass = req.body.pass;
     var user = req.body.user;
     for (var i = 0 ; i < num.length; i++) {
-        if (user == users[i]) {
+        if (user == users[i].user) {
             x = i;
         }
     }
@@ -51,7 +50,7 @@ app.post("/check", function(req,res){
         res.send("Sorry");
     }
     else {
-        if (passwordHash.verify(pass, passes[x])) {
+        if (passwordHash.verify(pass, users[x].pass)) {
             res.send("Nice");
         }
         else {
