@@ -2,7 +2,10 @@ var express = require('express');
 var app = express()
 var multer  = require('multer');
 var storage = multer.memoryStorage()
+var bodyParser = require('body-parser');
 var upload = multer({ storage: storage })
+
+app.use(bodyParser.urlencoded({ extended: true })); 
 
 app.get("/", function(req,res){
     res.sendfile(__dirname + "/main.html");
@@ -17,7 +20,7 @@ app.post("/signup", function(req,res){
 })
 
 app.post("/newAccount", function(req,res){
-    res.json({"username": req.user, "password": req.pass, "email": req.email})
+    res.json({"username": req.body.user, "password": req.body.pass, "email": req.body.email})
 })
 
 app.listen(process.env.PORT || 3000, function () {
