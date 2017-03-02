@@ -6,9 +6,7 @@ var bodyParser = require('body-parser');
 var upload = multer({ storage: storage })
 var passwordHash = require('password-hash');
 
-var users = [];
-var num = 0;
-
+const users = [];
 
 app.use(bodyParser());
 
@@ -40,7 +38,7 @@ app.post("/check", function(req,res){
     var x = -1;
     var pass = req.body.pass;
     var user = req.body.user;
-    for (var i = 0 ; i < num.length; i++) {
+    for (var i = 0 ; i < users.length; i++) {
         if (user == users[i].user) {
             x = i;
         }
