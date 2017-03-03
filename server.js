@@ -34,6 +34,7 @@ app.post("/newAccount", function(req,res){
         user: req.body.user
     };
     users.push(addition);
+    fs.writeFile("username.txt", req.body.user, "utf8");
     
     res.sendFile(__dirname + "/homepage.html")
 })
@@ -55,12 +56,7 @@ app.post("/check", function(req,res){
     else {
         if (passwordHash.verify(pass, users[x].pass)) {
             fs.writeFile("username.txt", user, "utf8");
-            fs.readFile("username.txt", 'utf8', function(err, data) {
-                if (err) {
-                    
-                }
-                    res.send(data);
-                });
+            res.sendFile(__dirname + "/homepage.html")
 
         }
         else {
