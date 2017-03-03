@@ -6,15 +6,28 @@ var bodyParser = require('body-parser');
 var upload = multer({ storage: storage })
 var passwordHash = require('password-hash');
 var fs = require('fs');
+var session = require('client-sessions');
 
 
 var users = [];
 
 app.use(bodyParser());
 
+app.use(session({
+  cookieName: 'username',
+  secret: 'a359d9fj',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+}));
+
 
 app.get("/", function(req,res){
+     if (req.session && req.session.user) {
+         res.send("Hello Again");
+     }
+     else {
     res.sendfile(__dirname + "/main.html");
+     }
 })
 
 app.post("/login", function(req,res){
@@ -55,7 +68,7 @@ app.post("/check", function(req,res){
     }
     else {
         if (passwordHash.verify(pass, users[x].pass)) {
-            fs.writeFile("username.txt", user, "utf8");
+            req.session.user = user;
             res.sendFile(__dirname + "/homepage.html")
 
         }
