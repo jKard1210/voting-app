@@ -47,7 +47,11 @@ app.post("/newAccount", function(req,res){
         user: req.body.user
     };
     users.push(addition);
-    fs.writeFile("username.txt", req.body.user, "utf8");
+    req.session.user = req.body.user;
+    
+    if (req.session && req.session.user) {
+         res.send(req.session.user);
+     }
     
     res.sendFile(__dirname + "/homepage.html")
 })
