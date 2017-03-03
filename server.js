@@ -52,8 +52,9 @@ app.post("/newAccount", function(req,res){
     if (req.session && req.session.user) {
          res.send(req.session.user);
      }
-    
+    else {
     res.sendFile(__dirname + "/homepage.html")
+    }
 })
 
 app.post("/check", function(req,res){
