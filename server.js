@@ -14,7 +14,7 @@ var users = [];
 app.use(bodyParser());
 
 app.use(session({
-  cookieName: 'username',
+  cookieName: 'session',
   secret: 'a359d9fj',
   duration: 30 * 60 * 1000,
   activeDuration: 5 * 60 * 1000,
