@@ -18,7 +18,6 @@ app.get("/", function(req,res){
 })
 
 app.post("/login", function(req,res){
-    var user = cookies.get('username');
     res.sendFile(__dirname + "/login.html")
 })
 
