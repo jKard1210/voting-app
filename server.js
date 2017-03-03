@@ -6,11 +6,10 @@ var bodyParser = require('body-parser');
 var upload = multer({ storage: storage })
 var passwordHash = require('password-hash');
 var fs = require('fs');
-app.use(express.cookieParser());
+var Cookies = require( "cookies" )
 
 
 var users = [];
-
 
 app.use(bodyParser());
 
@@ -20,6 +19,7 @@ app.get("/", function(req,res){
 })
 
 app.post("/login", function(req,res){
+    var user = cookies.get('username');
     res.sendFile(__dirname + "/login.html")
 })
 
@@ -56,8 +56,8 @@ app.post("/check", function(req,res){
     }
     else {
         if (passwordHash.verify(pass, users[x].pass)) {
-            res.cookie('username', user, { maxAge: 900000, httpOnly: true });
-            res.sendFile(__dirname + "/homepage.html");
+            fs.writeFile("username.txt", user, "utf8");
+            res.sendFile(__dirname + "/username.txt");
         }
         else {
             res.send("Error: Incorrect Password");
