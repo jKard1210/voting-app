@@ -6,7 +6,6 @@ var bodyParser = require('body-parser');
 var upload = multer({ storage: storage })
 var passwordHash = require('password-hash');
 var fs = require('fs');
-var Cookies = require( "cookies" )
 
 
 var users = [];
