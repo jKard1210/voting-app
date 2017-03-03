@@ -1,9 +1,9 @@
-
+<html>
 <body>
     <h1 id = "result">Hello</h1>
 </body>
 
 <script src="jquery-3.1.1.min.js">
-    
-    document.getElementById("result").innerHTML = localStorage.getItem("username");
+    document.getElementById("result").html(localStorage.getItem("username"));
 </script>
+</html>
