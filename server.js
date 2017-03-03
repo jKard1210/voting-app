@@ -55,7 +55,13 @@ app.post("/check", function(req,res){
     else {
         if (passwordHash.verify(pass, users[x].pass)) {
             fs.writeFile("username.txt", user, "utf8");
-            res.sendFile(__dirname + "/username.txt");
+            fs.readFile("username.txt", 'utf8', function(err, data) {
+                if (err) {
+                    
+                }
+                    res.send(data);
+                });
+
         }
         else {
             res.send("Error: Incorrect Password");
