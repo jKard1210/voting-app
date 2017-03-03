@@ -5,8 +5,12 @@ var storage = multer.memoryStorage()
 var bodyParser = require('body-parser');
 var upload = multer({ storage: storage })
 var passwordHash = require('password-hash');
+var fs = require('fs');
+var LocalStorage = require('node-localstorage').LocalStorage,
+localStorage = new LocalStorage('./scratch');
 
-const users = [];
+var users = [];
+
 
 app.use(bodyParser());
 
@@ -25,19 +29,22 @@ app.post("/signup", function(req,res){
 
 app.post("/newAccount", function(req,res){
     var hashedPass = passwordHash.generate(req.body.pass);
-    users.push({
+
+    var addition = {
         pass: hashedPass,
         email: req.body.email,
         user: req.body.user
-    })
+    };
+    users.push(addition);
     
-    res.sendFile(__dirname + "/homePage.html")
+    res.sendFile(__dirname + "/homepage.html")
 })
 
 app.post("/check", function(req,res){
     var x = -1;
     var pass = req.body.pass;
     var user = req.body.user;
+    
     for (var i = 0 ; i < users.length; i++) {
         if (user == users[i].user) {
             x = i;
@@ -45,14 +52,15 @@ app.post("/check", function(req,res){
     }
     
     if (x == -1) {
-        res.send("Sorry");
+        res.send("Error: Incorrect Username");
     }
     else {
         if (passwordHash.verify(pass, users[x].pass)) {
-            res.send("Nice");
+            localStorage.setItem("username", user);
+            res.sendFile(__dirname + "/homepage.html");
         }
         else {
-            res.send("Nope");
+            res.send("Error: Incorrect Password");
         }
     }
 })
