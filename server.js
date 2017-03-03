@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var upload = multer({ storage: storage })
 var passwordHash = require('password-hash');
 var fs = require('fs');
-
+app.use(express.cookieParser());
 
 
 var users = [];
@@ -56,7 +56,7 @@ app.post("/check", function(req,res){
     }
     else {
         if (passwordHash.verify(pass, users[x].pass)) {
-            localStorage.setItem("username", user);
+            res.cookie('username', user, { maxAge: 900000, httpOnly: true });
             res.sendFile(__dirname + "/homepage.html");
         }
         else {
