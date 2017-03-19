@@ -99,20 +99,25 @@ var users = [
 ];
 
 var app = express()
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var cookieSession = require('cookie-session');
+
+
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
   app.engine('ejs', require('ejs-locals'));
+  app.use(cookieParser());
+app.use(cookieSession({secret: 'app_1'}));
   app.use(express.logger());
   app.use(express.static(__dirname + '/../../public'));
-  app.use(express.cookieParser());
-  app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.session({ secret: 'keyboard cat' }));
   app.use(flash());
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(passport.authenticate('remember-me'));
   app.use(app.router);
+
 
 
 app.get("/", function(req,res){
