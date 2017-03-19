@@ -1,11 +1,12 @@
 {
   "name": "voting_app",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A voting app",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.17.1",
     "connect-flash": "0.1.x",
+    "passport-remember-me": "0.1.x",
     "cookie-parser": "^1.4.3",
     "cookie-session": "^2.0.0-beta.1",
     "ejs-locals": "1.x.x",
