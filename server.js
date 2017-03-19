@@ -125,6 +125,10 @@ app.get('/account', ensureAuthenticated, function(req, res){
   res.render('account', { user: req.user });
 });
 
+app.get('/signup', function(req, res) {
+    res.render('signup');
+})
+
 app.get('/login', function(req, res){
   res.render('login', { user: req.user, message: req.flash('error') });
 });
@@ -146,6 +150,11 @@ app.post('/login',
   function(req, res) {
     res.redirect('/');
   });
+  
+  app.post('/account', 
+  function(req, res) {
+      res.redirect('/account');
+  })
 
 app.get('/logout', function(req, res){
   // clear the remember me cookie when logging out
