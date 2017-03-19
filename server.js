@@ -99,8 +99,6 @@ var users = [
 ];
 
 var app = express()
-
-app.configure(function() {
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
   app.engine('ejs', require('ejs-locals'));
@@ -115,7 +113,7 @@ app.configure(function() {
   app.use(passport.session());
   app.use(passport.authenticate('remember-me'));
   app.use(app.router);
-});
+
 
 app.get("/", function(req,res){
      res.render('index', { user: req.user });

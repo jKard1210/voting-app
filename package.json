@@ -3,11 +3,8 @@
   "version": "1.0.0",
   "description": "A voting app",
   "main": "server.js",
-  "scripts": {
-"start": "node server.js"
-},
   "dependencies": {
-    "express": "4.15.2",
+     "express": "3.x.x",
     "connect-flash": "0.1.x",
     "ejs-locals": "1.x.x",
     "passport": "0.1.x",
