@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A voting app",
   "main": "server.js",
+  "scripts": {
+"start": "node server.js"
+},
   "dependencies": {
     "express": "4.15.2",
     "connect-flash": "0.1.x",
