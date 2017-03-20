@@ -70,8 +70,7 @@ var users = [
 var app = express()
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var cookieSession = require('cookie-session');;
-var methodOverride = require('method-override')
+var cookieSession = require('cookie-session');
 
 
   app.set('views', __dirname + '/views');
@@ -81,7 +80,6 @@ var methodOverride = require('method-override')
 app.use(cookieSession({secret: 'app_1'}));
   app.use(express.logger());
   app.use(express.static(__dirname + '/../../public'));
-  app.use(methodOverride());
   app.use(flash());
   app.use(passport.initialize());
   app.use(passport.session());
