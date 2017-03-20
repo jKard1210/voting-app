@@ -3,7 +3,6 @@ var express = require('express')
   , flash = require('connect-flash')
   , utils = require('./utils')
   , LocalStrategy = require('passport-local').Strategy;
-var RememberMeStrategy = require('passport-remember-me').Strategy;
 
 
 
@@ -33,17 +32,7 @@ function findByUsername(username, fn) {
 
 var tokens = {}
 
-function consumeRememberMeToken(token, fn) {
-  var uid = tokens[token];
-  // invalidate the single-use token
-  delete tokens[token];
-  return fn(null, uid);
-}
 
-function saveRememberMeToken(token, uid, fn) {
-  tokens[token] = uid;
-  return fn();
-}
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -69,29 +58,9 @@ passport.use(new LocalStrategy(
   }
 ));
 
-passport.use(new RememberMeStrategy(
-  function(token, done) {
-    consumeRememberMeToken(token, function(err, uid) {
-      if (err) { return done(err); }
-      if (!uid) { return done(null, false); }
-      
-      findById(uid, function(err, user) {
-        if (err) { return done(err); }
-        if (!user) { return done(null, false); }
-        return done(null, user);
-      });
-    });
-  },
-  issueToken
-));
 
-function issueToken(user, done) {
-  var token = utils.randomString(64);
-  saveRememberMeToken(token, user.id, function(err) {
-    if (err) { return done(err); }
-    return done(null, token);
-  });
-}
+
+
 
 var users = [
     { id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
@@ -145,11 +114,6 @@ app.post('/login',
     // Issue a remember me cookie if the option was checked
     if (!req.body.remember_me) { return next(); }
     
-    issueToken(req.user, function(err, token) {
-      if (err) { return next(err); }
-      res.cookie('remember_me', token, { path: '/', httpOnly: true, maxAge: 604800000 });
-      return next();
-    });
   },
   function(req, res) {
     res.redirect('/');
