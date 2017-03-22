@@ -3,15 +3,23 @@
   "version": "2.0.0",
   "description": "A voting app",
   "main": "server.js",
-  "dependencies": {
-    "body-parser": "^1.17.1",
-    "connect-flash": "0.1.x",
-    "cookie-parser": "^1.4.3",
-    "cookie-session": "^2.0.0-beta.1",
-    "ejs-locals": "1.x.x",
-    "express": "4.x.x",
-    "passport": "0.1.x",
-    "passport-local": "0.1.x"
+  "dependencies" : {
+    "express" : "~4.0.0",           
+    "ejs" : "~0.8.5",               
+    "mongoose" : "~3.8.1",          
+    "passport" : "~0.1.17",         
+    "passport-local" : "~0.1.6",    
+    "passport-facebook" : "~1.0.2", 
+    "passport-twitter" : "~1.0.2",  
+    "passport-google-oauth" : "~0.1.5",
+    "connect-flash" : "~0.1.1",     
+    "bcrypt-nodejs" : "latest",
+
+    "morgan": "~1.0.0",
+    "body-parser": "~1.0.0",
+    "cookie-parser": "~1.0.0",
+    "method-override": "~1.0.0",
+    "express-session": "~1.0.0"     
   },
   "devDependencies": {}
 }
