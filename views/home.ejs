@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <style>
         body        { padding-top:80px; word-wrap:break-word; background-image: url("http://i.imgur.com/IFcqIOS.jpg"); opacity: 80% }
+        h3 { text-align: center; margin-bottom: 10px; }
+        form {text-align: center; }
+        .r {margin-right: 20px;}
+        .subButton {margin-top: 15px;}
+        
     </style>
 </head>
 <body>
@@ -24,17 +29,15 @@
 
         <!-- LOCAL INFORMATION -->
 
-            <div class="well" style = "text-align: center">
-                <h3><span class="fa fa-user"></span> Local</h3>
+           
+                    
+                    
+                    <% entries = data.map(function(elem) {
+    return '<div class = "well"> <h3 href="/' + elem.num + '">' + elem.title + '</h3><form action="/home" method="get"><input type="radio" class = "r" name="option" value="r1">' +  elem.r1 + '               <input type="radio" name="option" value="r2">' +  elem.r2 + '<br><input type="radio" name="option" class = "r" value="r3">' +  elem.r3 + '           <input type="radio" name="option"  value="r4">' +  elem.r4 + '<br><input class = "subButton" type="submit" value="Submit"></form></div>';
+}) -%>
+<p><%- entries.join("") %></p>
 
-                    <p>
-                        <strong id = "polls">id</strong>: <%= user._id %><br>
-                        <strong><%= data[0].title%></strong>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
-                    </p>
-
-            </div>
+            
 
     </div>
 

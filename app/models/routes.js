@@ -1,5 +1,24 @@
 module.exports = function(app, passport) {
 
+var mongoose = require('mongoose');
+        var db = require('../../config/database.js');
+ 
+        
+        var Schema = mongoose.Schema;
+         var poll = new Schema({
+                title: String,
+                num: Number,
+                r1: String,
+                a1: Number,
+                r2: String,
+                a2: Number,
+                r3: String,
+                a3: Number,
+                r4: String,
+                a4: Number,
+         });
+
+        var poll = mongoose.model('polls', poll);
 
     app.get('/', function(req, res) {
         res.render('index.ejs'); // load the index.ejs file
@@ -32,17 +51,8 @@ app.post('/login', passport.authenticate('local-login', {
     }));
 
     app.get('/home', isLoggedIn, function(req, res) {
-        var mongoose = require('mongoose');
-        var db = require('../../config/database.js');
- 
-        
-        var Schema = mongoose.Schema;
-         var poll = new Schema({
-                title: String,
-         });
 
-        var PollModel = mongoose.model('polls', poll);
-        var poll = mongoose.model("polls");
+
 
 
         poll.find({}, function(err, data){
