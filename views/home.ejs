@@ -8,8 +8,8 @@
     <style>
         body        { padding-top:80px; word-wrap:break-word; background-image: url("http://i.imgur.com/IFcqIOS.jpg"); opacity: 80% }
         h3 { text-align: center; margin-bottom: 10px; }
-        form {text-align: center; }
-        .r {margin-right: 20px;}
+        form {text-align: center;}
+        label {padding-right: 25px; padding-left: 25px; text-size: 40px;}
         .subButton {margin-top: 15px;}
         
     </style>
@@ -33,7 +33,7 @@
                     
                     
                     <% entries = data.map(function(elem) {
-    return '<div class = "well"> <h3 href="/' + elem.num + '">' + elem.title + '</h3><form action="/home" method="get"><input type="radio" class = "r" name="option" value="r1">' +  elem.r1 + '               <input type="radio" name="option" value="r2">' +  elem.r2 + '<br><input type="radio" name="option" class = "r" value="r3">' +  elem.r3 + '           <input type="radio" name="option"  value="r4">' +  elem.r4 + '<br><input class = "subButton" type="submit" value="Submit"></form></div>';
+    return '<div class = "well"> <h3 href="/' + elem.num + '">' + elem.title + '</h3><form action="/home" method="get"><label><input type="radio" name="option" value="r1">' +  elem.r1 + '</label><label> <input type="radio" name="option" value="r2">' +  elem.r2 + '</label><br><label><input type="radio" name="option"  value="r3">' +  elem.r3 + '</label><label><input type="radio" name="option"  value="r4">' +  elem.r4 + '</label><br><input class = "subButton" type="submit" value="Submit"></form></div>';
 }) -%>
 <p><%- entries.join("") %></p>
 
