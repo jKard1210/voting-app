@@ -1,0 +1,45 @@
+<!doctype html>
+
+
+<html>
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body        { padding-top:80px; word-wrap:break-word; background-image: url("http://i.imgur.com/IFcqIOS.jpg"); opacity: 80% }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class = "text-center">
+     <a href="/logout" class="btn btn-default btn-sm" style= "width: 150px;">Logout</a>
+     <a href= "/create" class = "btn btn-default btn-sm" style = "width: 150px"> Create New Poll</a>
+     </div>
+    <div class="page-header text-center">
+        <h1 style = "color: maroon" id = "polls"><span class="fa"></span> Polls</h1>
+    </div>
+
+    <div class="row">
+
+        <!-- LOCAL INFORMATION -->
+
+            <div class="well" style = "text-align: center">
+                <h3><span class="fa fa-user"></span> Local</h3>
+
+                    <p>
+                        <strong id = "polls">id</strong>: <%= user._id %><br>
+                        <strong><%= data[0].title%></strong>
+                        <strong>email</strong>: <%= user.local.email %><br>
+                        <strong>password</strong>: <%= user.local.password %>
+                    </p>
+
+            </div>
+
+    </div>
+
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+</body>
+</html>
