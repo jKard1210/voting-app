@@ -33,7 +33,7 @@
                     
                     
                     <% entries = data.map(function(elem) {
-    return '<div class = "well"> <h3 href="/' + elem.num + '">' + elem.title + '</h3><form action="/home" method="get"><label><input type="radio" name="option" value="r1">' +  elem.r1 + '</label><label> <input type="radio" name="option" value="r2">' +  elem.r2 + '</label><br><label><input type="radio" name="option"  value="r3">' +  elem.r3 + '</label><label><input type="radio" name="option"  value="r4">' +  elem.r4 + '</label><br><input class = "subButton" type="submit" value="Submit"></form></div>';
+    return '<div class = "well"> <h3>' + elem.title + '</h3><form action="/respond/' + elem.num + '" method="get"><label><input type="radio" name="option" value="a1">' +  elem.r1 + '</label><label> <input type="radio" name="option" value="a2">' +  elem.r2 + '</label><br><label><input type="radio" name="option"  value="a3">' +  elem.r3 + '</label><label><input type="radio" name="option"  value="a4">' +  elem.r4 + '</label><br><input class = "subButton" type="submit" value="Submit"></form></div>';
 }) -%>
 <p><%- entries.join("") %></p>
 

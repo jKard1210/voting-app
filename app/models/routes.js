@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
  
         
         var Schema = mongoose.Schema;
-         var poll = new Schema({
+         var pollSchema = new Schema({
                 title: String,
                 num: Number,
                 r1: String,
@@ -18,7 +18,7 @@ var mongoose = require('mongoose');
                 a4: Number,
          });
 
-        var poll = mongoose.model('polls', poll);
+        var poll = mongoose.model('polls', pollSchema);
 
     app.get('/', function(req, res) {
         res.render('index.ejs'); // load the index.ejs file
@@ -53,8 +53,6 @@ app.post('/login', passport.authenticate('local-login', {
     app.get('/home', isLoggedIn, function(req, res) {
 
 
-
-
         poll.find({}, function(err, data){
         if (err) console.log(err);
         console.log(">>>> " + data);
@@ -72,6 +70,38 @@ app.post('/login', passport.authenticate('local-login', {
         });
     });
     
+    app.get('/respond/:num', isLoggedIn, function(req, res) {
+        var num =req.params.num;
+        var r = req.query.option.valueOf();
+        console.log(r);
+        if (r == "a1") {
+        poll.findOneAndUpdate({'num': num}, {$inc: { "a1" : 1}}, function(err, data) {
+            if (err) console.log(err);
+            console.log(data);
+        });
+        }
+        else if (r == "a2") {
+        poll.findOneAndUpdate({'num': num}, {$inc: { "a2" : 1}}, function(err, data) {
+            if (err) console.log(err);
+            console.log(data);
+        });
+        }
+        else if (r == "a3") {
+        poll.findOneAndUpdate({'num': num}, {$inc: { "a3" : 1}}, function(err, data) {
+            if (err) console.log(err);
+            console.log(data);
+        });
+        }
+        else if (r == "a4") {
+        poll.findOneAndUpdate({'num': num}, {$inc: { "a4" : 1}}, function(err, data) {
+            if (err) console.log(err);
+            console.log(data);
+        });
+        }
+
+                res.redirect("/home");
+            })
+    
     
     app.get('/account', isLoggedIn, function(req, res) {
         res.render('account.ejs', {
@@ -83,6 +113,28 @@ app.post('/login', passport.authenticate('local-login', {
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
+    });
+    
+    app.get('/sendPoll', function(req, res) {
+
+        var newPoll = new poll({
+            "title" : req.query.question,
+            "r1": req.query.r1,
+            "r2": req.query.r2,
+            "r3": req.query.r3,
+            "r4": req.query.r4,
+            "a1": 0,
+            "a2": 0,
+            "a3": 0,
+            "a4": 0
+        });
+        newPoll.save(function(err) {
+                    if (err)
+                        throw err;
+                    return newPoll;
+                });
+        
+        res.redirect("/home");
     });
 };
 
