@@ -2,7 +2,7 @@ module.exports = function(app, passport) {
 
 var mongoose = require('mongoose');
         var db = require('../../config/database.js');
- 
+ var currentNum = 10;
         
         var Schema = mongoose.Schema;
          var pollSchema = new Schema({
@@ -73,33 +73,55 @@ app.post('/login', passport.authenticate('local-login', {
     app.get('/respond/:num', isLoggedIn, function(req, res) {
         var num =req.params.num;
         var r = req.query.option.valueOf();
+        var pollObject;
         console.log(r);
         if (r == "a1") {
         poll.findOneAndUpdate({'num': num}, {$inc: { "a1" : 1}}, function(err, data) {
             if (err) console.log(err);
             console.log(data);
+           pollObject = data;
+           res.render('pollView.ejs', {
+                    data: pollObject
+                    
+                })
         });
         }
         else if (r == "a2") {
         poll.findOneAndUpdate({'num': num}, {$inc: { "a2" : 1}}, function(err, data) {
             if (err) console.log(err);
             console.log(data);
+             pollObject = data;
+             res.render('pollView.ejs', {
+                    data: pollObject
+                    
+                })
         });
         }
         else if (r == "a3") {
         poll.findOneAndUpdate({'num': num}, {$inc: { "a3" : 1}}, function(err, data) {
             if (err) console.log(err);
             console.log(data);
+             pollObject = data;
+             res.render('pollView.ejs', {
+                    data: pollObject
+                    
+                })
         });
         }
         else if (r == "a4") {
         poll.findOneAndUpdate({'num': num}, {$inc: { "a4" : 1}}, function(err, data) {
             if (err) console.log(err);
             console.log(data);
+             pollObject = data;
+             res.render('pollView.ejs', {
+                    data: pollObject
+                    
+                })
         });
         }
 
-                res.redirect("/home");
+
+            
             })
     
     
@@ -126,8 +148,10 @@ app.post('/login', passport.authenticate('local-login', {
             "a1": 0,
             "a2": 0,
             "a3": 0,
-            "a4": 0
+            "a4": 0,
+            "num" : currentNum
         });
+        currentNum++;
         newPoll.save(function(err) {
                     if (err)
                         throw err;
