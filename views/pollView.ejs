@@ -18,10 +18,15 @@
     <div class = "page-header text-center">
         <h3 style = "color: maroon"><%= data.title%></h3>
     </div>
+    <%  if (data.r1 !== "") {  %>
     <h3  id = "r1" style = "text-align: center; background-color: gray; opacity: 50%"><%= data.r1 + "&emsp;&emsp;&emsp;" + data.a1%></h3>
+    <%  } if (data.r2 !== "") {  %>
     <h3  id = "r2" style = "text-align: center; background-color: gray; opacity: 50%"><%= data.r2 + "&emsp;&emsp;&emsp;" + data.a2 %></h3>
+    <%  } if (data.r3 !== "") {  %>
     <h3  id = "r3" style = "text-align: center; background-color: gray; opacity: 50%"><%= data.r3 + "&emsp;&emsp;&emsp;" + data.a3%></h3>
+    <%  } if (data.r3 !== "") {%>
     <h3  id = "r4" style = "text-align: center; background-color: gray; opacity: 50%"><%= data.r4 + "&emsp;&emsp;&emsp;" + data.a4%></h3>
+    <% } %>
     </div>
 </body>
 
