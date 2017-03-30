@@ -2,7 +2,6 @@ module.exports = function(app, passport) {
 
 var mongoose = require('mongoose');
         var db = require('../../config/database.js');
- var currentNum = 10;
         
         var Schema = mongoose.Schema;
          var pollSchema = new Schema({
@@ -19,6 +18,7 @@ var mongoose = require('mongoose');
          });
 
         var poll = mongoose.model('polls', pollSchema);
+        
 
     app.get('/', function(req, res) {
         res.render('index.ejs'); // load the index.ejs file
@@ -70,13 +70,13 @@ app.post('/login', passport.authenticate('local-login', {
         });
     });
     
-    app.get('/respond/:num', isLoggedIn, function(req, res) {
-        var num =req.params.num;
+    app.get('/respond/:id', isLoggedIn, function(req, res) {
+        var id =req.params.id;
         var r = req.query.option.valueOf();
         var pollObject;
         console.log(r);
         if (r == "a1") {
-        poll.findOneAndUpdate({'num': num}, {$inc: { "a1" : 1}}, function(err, data) {
+        poll.findOneAndUpdate({'_id': id}, {$inc: { "a1" : 1}}, function(err, data) {
             if (err) console.log(err);
             console.log(data);
            pollObject = data;
@@ -87,7 +87,7 @@ app.post('/login', passport.authenticate('local-login', {
         });
         }
         else if (r == "a2") {
-        poll.findOneAndUpdate({'num': num}, {$inc: { "a2" : 1}}, function(err, data) {
+        poll.findOneAndUpdate({'_id': id}, {$inc: { "a2" : 1}}, function(err, data) {
             if (err) console.log(err);
             console.log(data);
              pollObject = data;
@@ -98,7 +98,7 @@ app.post('/login', passport.authenticate('local-login', {
         });
         }
         else if (r == "a3") {
-        poll.findOneAndUpdate({'num': num}, {$inc: { "a3" : 1}}, function(err, data) {
+        poll.findOneAndUpdate({'_id': id}, {$inc: { "a3" : 1}}, function(err, data) {
             if (err) console.log(err);
             console.log(data);
              pollObject = data;
@@ -109,7 +109,7 @@ app.post('/login', passport.authenticate('local-login', {
         });
         }
         else if (r == "a4") {
-        poll.findOneAndUpdate({'num': num}, {$inc: { "a4" : 1}}, function(err, data) {
+        poll.findOneAndUpdate({'_id': id}, {$inc: { "a4" : 1}}, function(err, data) {
             if (err) console.log(err);
             console.log(data);
              pollObject = data;
@@ -149,9 +149,7 @@ app.post('/login', passport.authenticate('local-login', {
             "a2": 0,
             "a3": 0,
             "a4": 0,
-            "num" : currentNum
         });
-        currentNum++;
         newPoll.save(function(err) {
                     if (err)
                         throw err;
